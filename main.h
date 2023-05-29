@@ -36,5 +36,5 @@ int fetch_precision(const char *f, int *i, va_list list);
 int fetch_size(const char *f, int *i);
 
 void handle_buffers(char buffer[], int *buff_ind);
-void handle_specifiers(const char* format, ...);
+
 #endif /* MAIN_H */
