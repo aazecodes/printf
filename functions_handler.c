@@ -1,7 +1,4 @@
 #include "main.h"
-
-/************************* PRINT CHAR *************************/
-
 /**
  * print_char - Prints a char
  * @types: List a of arguments
@@ -10,7 +7,7 @@
  * @width: Width
  * @precision: Precision specification
  * @size: Size specifier
- * Return: Number of chars printed
+ * Return: integer
  */
 int print_char(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
@@ -19,7 +16,6 @@ int print_char(va_list types, char buffer[],
 
 	return (handle_write_char(c, buffer, flags, width, precision, size));
 }
-/************************* PRINT A STRING *************************/
 /**
  * print_string - Prints a string
  * @types: List a of arguments
@@ -28,12 +24,12 @@ int print_char(va_list types, char buffer[],
  * @width: get width.
  * @precision: Precision specification
  * @size: Size specifier
- * Return: Number of chars printed
+ * Return: string
  */
 int print_string(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int length = 0, i;
+	int length, i;
 	char *str = va_arg(types, char *);
 
 	UNUSED(buffer);
@@ -48,9 +44,7 @@ int print_string(va_list types, char buffer[],
 			str = "      ";
 	}
 
-	while (str[length] != '\0')
-		length++;
-
+	for (length = 0; str[length] != '\0'; length++)
 	if (precision >= 0 && precision < length)
 		length = precision;
 
@@ -74,7 +68,6 @@ int print_string(va_list types, char buffer[],
 
 	return (write(1, str, length));
 }
-/************************* PRINT PERCENT SIGN *************************/
 /**
  * print_percent - Prints a percent sign
  * @types: Lista of arguments
@@ -97,7 +90,6 @@ int print_percent(va_list types, char buffer[],
 	return (write(1, "%%", 1));
 }
 
-/************************* PRINT INT *************************/
 /**
  * print_int - Print int
  * @types: Lista of arguments
@@ -141,7 +133,6 @@ int print_int(va_list types, char buffer[],
 	return (write_number(is_negative, i, buffer, flags, width, precision, size));
 }
 
-/************************* PRINT BINARY *************************/
 /**
  * print_binary - Prints an unsigned number
  * @types: Lista of arguments

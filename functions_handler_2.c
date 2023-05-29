@@ -1,10 +1,8 @@
 #include "main.h"
-
-/****************** PRINT POINTER ******************/
 /**
- * print_pointer - Prints the value of a pointer variable
+ * print_pointer - function to print the value of a pointer variable
  * @types: List a of arguments
- * @buffer: Buffer array to handle print
+ * @buffer: Buffer array
  * @flags:  Calculates active flags
  * @width: get width
  * @precision: Precision specification
@@ -52,7 +50,6 @@ int print_pointer(va_list types, char buffer[],
 		width, flags, padd, extra_c, padd_start));
 }
 
-/************************* PRINT NON PRINTABLE *************************/
 /**
  * print_non_printable - Prints ascii codes in hexa of non printable chars
  * @types: Lista of arguments
@@ -66,7 +63,7 @@ int print_pointer(va_list types, char buffer[],
 int print_non_printable(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int i = 0, offset = 0;
+	int a, offset = 0;
 	char *str = va_arg(types, char *);
 
 	UNUSED(flags);
@@ -77,22 +74,18 @@ int print_non_printable(va_list types, char buffer[],
 	if (str == NULL)
 		return (write(1, "(null)", 6));
 
-	while (str[i] != '\0')
+	for (a = 0; str[a] != '\0'; a++)
 	{
-		if (is_printable(str[i]))
-			buffer[i + offset] = str[i];
+		if (is_printable(str[a]))
+			buffer[a + offset] = str[a];
 		else
-			offset += append_hexa_code(str[i], buffer, i + offset);
+			offset += append_hexa_code(str[a], buffer, a + offset);
 
-		i++;
 	}
-
-	buffer[i + offset] = '\0';
-
-	return (write(1, buffer, i + offset));
+	buffer[a + offset] = '\0';
+	return (write(1, buffer, a + offset));
 }
 
-/************************* PRINT REVERSE *************************/
 /**
  * print_reverse - Prints reverse string.
  * @types: Lista of arguments
@@ -108,7 +101,7 @@ int print_reverse(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	char *str;
-	int i, count = 0;
+	int a, count = 0;
 
 	UNUSED(buffer);
 	UNUSED(flags);
@@ -123,19 +116,19 @@ int print_reverse(va_list types, char buffer[],
 
 		str = ")Null(";
 	}
-	for (i = 0; str[i]; i++)
+	for (a = 0; str[a]; a++)
 		;
 
-	for (i = i - 1; i >= 0; i--)
+	for (a = a - 1; a >= 0; a--)
 	{
-		char z = str[i];
+		char z = str[a];
 
 		write(1, &z, 1);
 		count++;
 	}
 	return (count);
 }
-/************************* PRINT A STRING IN ROT13 *************************/
+
 /**
  * print_rot13string - Print a string in rot13.
  * @types: Lista of arguments
