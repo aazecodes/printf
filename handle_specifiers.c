@@ -7,7 +7,7 @@
  * Return: If a conversion function is matched - a pointer to the function.
  *         Otherwise - NULL.
  */
-void handle_specifiers(const char *format, ...)
+int  _printf(const char *format, ...)
 {
 	va_list args;
 
@@ -62,4 +62,5 @@ void handle_specifiers(const char *format, ...)
 		format++;
 	}
 	va_end(args);
+	return (0);
 }
