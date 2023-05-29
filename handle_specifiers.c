@@ -8,7 +8,7 @@
  *         Otherwise - NULL.
  */
 
-int  _printf(const char *format, ...)
+void handle_specifiers(const char *format, ...)
 {
 	va_list args;
 
@@ -63,5 +63,4 @@ int  _printf(const char *format, ...)
 		format++;
 	}
 	va_end(args);
-	return (0);
 }
